@@ -1853,12 +1853,12 @@ abstract class CActiveRecord extends CModel
 	 * @return static|null the newly created active record. The class of the object is the same as the model class.
 	 * Null is returned if the input data is false.
 	 */
-  public function populateRecord($attributes,$callAfterFind=true,$scenario='update')
+  public function populateRecord($attributes,$callAfterFind=true)
 	{
 		if($attributes!==false)
 		{
 			$record=$this->instantiate($attributes);
-      $record->setScenario($scenario);
+      $record->setScenario('update');
 			$record->init();
 			$md=$record->getMetaData();
 			foreach($attributes as $name=>$value)
@@ -2182,8 +2182,6 @@ class CActiveRelation extends CBaseActiveRelation
 	 */
 	public $through;
 
-  public $scenario;
-
 	/**
 	 * Merges this relation with a criteria specified dynamically.
 	 * @param array $criteria the dynamically specified criteria
@@ -2226,9 +2224,6 @@ class CActiveRelation extends CBaseActiveRelation
 
 		if(isset($criteria['together']))
 			$this->together=$criteria['together'];
-
-    if(isset($criteria['scenario']))
-      $this->scenario=$criteria['scenario'];
 	}
 }
 

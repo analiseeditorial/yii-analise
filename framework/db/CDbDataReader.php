@@ -106,7 +106,7 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 * @param array $fields Elements of this array are passed to the constructor
 	 * @return mixed|false the populated object, false if no more row of data available
 	 */
-  public function readObject($className='stdClass',$fields=array())
+  public function readObject($className,$fields)
 	{
 		return $this->_statement->fetchObject($className,$fields);
 	}
@@ -116,9 +116,9 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 * @return array the result set (each array element represents a row of data).
 	 * An empty array will be returned if the result contains no row.
 	 */
-  public function readAll($fetchStyle=PDO::FETCH_BOTH)
+  public function readAll()
   {
-    return $this->_statement->fetchAll($fetchStyle);
+    return $this->_statement->fetchAll();
   }
 
 	/**
